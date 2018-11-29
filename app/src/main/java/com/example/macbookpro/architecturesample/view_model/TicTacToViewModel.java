@@ -1,14 +1,30 @@
 package com.example.macbookpro.architecturesample.view_model;
 
 import com.example.macbookpro.architecturesample.model.Board;
-import com.example.macbookpro.architecturesample.model.Cell;
 import com.example.macbookpro.architecturesample.model.Player;
-import com.example.macbookpro.architecturesample.view.MainActivity;
 
 public class TicTacToViewModel {
-    public MainActivity activity;
-
     public Board board;
-    public Cell cell;
-    public Player player;
+
+    public TicTacToViewModel() {
+        board = new Board();
+    }
+
+    public String markCell(int row, int col){
+        Player playerMark = board.mark(row, col);
+        return playerMark.toString();
+    }
+
+    public String checkWinOrDraw(){
+        Player winner = board.getWinner();
+        if (winner != null) {
+            return winner.toString();
+        } else {
+            return board.checkDraw() ? "DRAW" : null;
+        }
+    }
+
+    public void clear(){
+        board.restart();
+    }
 }
